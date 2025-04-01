@@ -7,7 +7,7 @@ import jakarta.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
 @ServerEndpoint("/echo")
-public class Message {
+public class MessageEndpoint {
     @OnMessage
     public void onMessage(Session session, String message) {
         System.out.println("Received message: " + message);
