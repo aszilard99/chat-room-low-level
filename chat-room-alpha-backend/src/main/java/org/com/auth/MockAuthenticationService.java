@@ -1,4 +1,4 @@
-package org.com;
+package org.com.auth;
 
 public class MockAuthenticationService implements AuthenticationService {
 
@@ -11,7 +11,7 @@ public class MockAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public boolean matchAuthToken(String username, String authToken) {
-        return username.equals("szilard99") && authToken.equals("authenticated");
+    public boolean validateAuthToken(String authToken, String username) {
+        return "szilard99".equals(username) && "authenticated".equals(authToken);
     }
 }

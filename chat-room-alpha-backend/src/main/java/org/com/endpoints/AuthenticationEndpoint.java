@@ -3,11 +3,9 @@ package org.com.endpoints;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import org.com.AuthenticationService;
+import org.com.auth.AuthenticationService;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.InetSocketAddress;
 
 public class AuthenticationEndpoint {
@@ -34,22 +32,27 @@ public class AuthenticationEndpoint {
         @Override
         public void handle(HttpExchange exchange){
 
+            //TODO beolvassa a username + jelszot, lemegy a db-be megnezi van-e ilyen,
+            // ha igen general egy tokent, berakja a db-be es visszakuldi a kliensnek
             var headers = exchange.getRequestHeaders();
+            String username = null;
+            String password = null;
             if (headers.containsKey("Username") && headers.containsKey("Password")){
-                String username = headers.get("Username").getFirst();
-                String password = headers.get("Password").getFirst();
+               username = headers.get("Username").getFirst();
+               password = headers.get("Password").getFirst();
             }
 
-            InputStreamReader inputStreamReeader = new InputStreamReader(exchange.getRequestBody());
-            try(BufferedReader bufferedReader = new BufferedReader(inputStreamReeader)) {
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
+            try(OutputStream os = exchange.getResponseBody()) {
+                if  (!"szilard99".equals(username) || !"abc123".equals(password)) {
+                    exchange.sendResponseHeaders(401, 0);
+                } else {
+                    String response = "authenticated";
+                    exchange.sendResponseHeaders(200, response.getBytes().length);
+                    os.write(response.getBytes());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            exchange.close();
         }
     }
 }

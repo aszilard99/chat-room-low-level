@@ -1,6 +1,7 @@
 package org.com;
 
 import jakarta.websocket.DeploymentException;
+import org.com.auth.AuthenticationService;
 import org.com.endpoints.MessageEndpoint;
 import org.com.endpoints.config.WebsocketServerConfigurator;
 import org.glassfish.tyrus.server.Server;
@@ -15,12 +16,12 @@ public class WebsocketServer implements Runnable {
     @Override
     public void run() {
         WebsocketServerConfigurator.setAuthenticationService(authenticationService);
-        Server websocketServer = new Server("localhost", 8080, "/ws", null ,MessageEndpoint.class);
+        Server websocketServer = new Server("localhost", 8080, "/ws", null, MessageEndpoint.class);
         try {
             websocketServer.start();
             System.out.println("Server started.");
             while(true) {
-                //TODO jobb varakozasi mod?
+                //TODO szebb varakozasi mod?
             }
         } catch (DeploymentException e) {
             System.out.println("Deployment exception");

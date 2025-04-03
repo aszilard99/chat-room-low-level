@@ -1,5 +1,7 @@
 package org.com;
 
+import org.com.auth.AuthenticationService;
+import org.com.auth.MockAuthenticationService;
 import org.com.endpoints.AuthenticationEndpoint;
 
 public class Main {
