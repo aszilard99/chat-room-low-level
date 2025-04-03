@@ -2,12 +2,20 @@ package org.com;
 
 import jakarta.websocket.DeploymentException;
 import org.com.endpoints.MessageEndpoint;
+import org.com.endpoints.config.WebsocketServerConfigurator;
 import org.glassfish.tyrus.server.Server;
 
 public class WebsocketServer implements Runnable {
+    private final AuthenticationService authenticationService;
+
+    public WebsocketServer(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
     @Override
     public void run() {
-        Server websocketServer = new Server("localhost", 8080, "/ws", null, MessageEndpoint.class);
+        WebsocketServerConfigurator.setAuthenticationService(authenticationService);
+        Server websocketServer = new Server("localhost", 8080, "/ws", null ,MessageEndpoint.class);
         try {
             websocketServer.start();
             System.out.println("Server started.");

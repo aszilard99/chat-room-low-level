@@ -3,7 +3,7 @@ package org.com.endpoints;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import org.com.IAuthenticationService;
+import org.com.AuthenticationService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,9 +11,9 @@ import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 
 public class AuthenticationEndpoint {
-    private IAuthenticationService authenticationService;
+    private AuthenticationService authenticationService;
 
-    public AuthenticationEndpoint(IAuthenticationService authenticationService) {
+    public AuthenticationEndpoint(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
     

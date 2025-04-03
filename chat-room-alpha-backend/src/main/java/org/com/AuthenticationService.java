@@ -1,6 +1,6 @@
 package org.com;
 
-public interface IAuthenticationService {
+public interface AuthenticationService {
     String login(String username, String password);
     boolean matchAuthToken(String username, String authToken);
 }

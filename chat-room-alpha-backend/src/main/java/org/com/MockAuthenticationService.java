@@ -1,6 +1,6 @@
 package org.com;
 
-public class MockAuthenticationService implements IAuthenticationService{
+public class MockAuthenticationService implements AuthenticationService {
 
     @Override
     public String login(String username, String password) {
