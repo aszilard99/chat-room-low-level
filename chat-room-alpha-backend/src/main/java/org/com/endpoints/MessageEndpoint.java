@@ -4,7 +4,7 @@ import jakarta.websocket.OnMessage;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
-import org.com.AuthenticationService;
+import org.com.auth.AuthenticationService;
 import org.com.endpoints.config.WebsocketServerConfigurator;
 
 import java.io.IOException;

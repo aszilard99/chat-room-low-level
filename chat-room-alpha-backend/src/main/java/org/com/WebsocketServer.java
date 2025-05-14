@@ -20,11 +20,13 @@ public class WebsocketServer implements Runnable {
         try {
             websocketServer.start();
             System.out.println("Server started.");
-            while(true) {
-                //TODO szebb varakozasi mod?
+            while(!Thread.currentThread().isInterrupted()) {
+                Thread.sleep(1000);
             }
         } catch (DeploymentException e) {
             System.out.println("Deployment exception");
+        } catch(InterruptedException e) {
+            System.out.println("Thread is interrupted");
         } finally {
             websocketServer.stop();
             System.out.println("Server stopped");
